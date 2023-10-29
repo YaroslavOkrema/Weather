@@ -1,0 +1,5 @@
+<div class="weather__container" *ngIf="weatherData">
+    <h2 class="weather__title">Weather in {{weatherData.name}}, {{weatherData.sys.country}}</h2>
+    <p class="weather__temperature">Temperature: {{weatherData.main.temp}} °C</p>
+    <p class="weaher__description">Weather: {{weatherData.weather[0].description}}</p>
+</div>
