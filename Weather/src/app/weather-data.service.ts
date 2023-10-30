@@ -7,12 +7,12 @@ import { HttpClient } from '@angular/common/http';
 export class WeatherDataService {
 
   private apiKey = '642c1ad128fd816bcb4ea30d07064974';
-  private baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
+  private apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
 
   constructor(private http: HttpClient) { }
 
-  getWeather(city: string) {
-    const url = `${this.baseUrl}?q=${city}&appid=${this.apiKey}`;
+  getWeatherByCoordinates(lat: number, lon: number) {
+    const url = `${this.apiUrl}?lat=${lat}&lon=${lon}&appid=${this.apiKey}`;
     return this.http.get(url);
   }
 }
