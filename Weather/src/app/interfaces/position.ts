@@ -1,4 +1,4 @@
-declare interface Position {
+export interface Position {
     coords: {
       latitude: number;
       longitude: number;
