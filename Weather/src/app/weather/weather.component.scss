@@ -1,0 +1,41 @@
+.weather__container {
+    padding: 20px;
+    text-align: center;
+}
+
+.weather__title {
+    font-size: 24px;
+    color: white;
+}
+
+.weather__temperature {
+    font-size: 36px;
+    margin-top: 10px;
+    color: white;
+}
+
+.weather__description {
+    font-size: 18px;
+    margin-top: 18px;
+    color: white;
+}
+
+.morning-bg {
+  background: url('../img/morning.PNG');
+    height: 100vh;
+  }
+  
+  .day-bg {
+    background: url('../img/day.PNG');
+    height: 100vh;
+  }
+  
+  .evening-bg {
+    background: url('../img/evening.PNG');
+    height: 100vh;
+  }
+  
+  .night-bg {
+    background: url('../img/night.PNG');
+    height: 100vh;
+  }
