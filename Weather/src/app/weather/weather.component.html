@@ -1,5 +1,7 @@
 <div class="weather__container" [ngClass]="timeOfDay" *ngIf="weatherData">  
-    <h2 class="weather__title">Weather in {{weatherData.name}}, {{weatherData.sys.country}}</h2>
-    <p class="weather__temperature">Temperature: {{weatherData.main.temp}} °C</p>
-    <p class="weather__description">Weather: {{weatherData.weather[0].description}}</p>
+    <h2 class="weather__title">{{weatherData.name}}, {{weatherData.sys.country}}</h2>
+    <p class="weather__temperature">{{weatherData.main.temp}} °</p>
+    <p class="weather__description">{{weatherData.weather[0].description}}</p>
+    <p class="weather__humidity">Humidity: {{weatherData.main.humidity}}%</p>
+    <p class="weather__wind">Wind: {{weatherData.wind.speed}} m/s</p>
 </div>

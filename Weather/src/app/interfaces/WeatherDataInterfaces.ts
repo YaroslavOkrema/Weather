@@ -1,14 +1,18 @@
 export interface Weather {
-    name: string;
+  name: string;
+  temp: number;
+  description: string;
+  sys: {
+    country: string;
+  };
+  main: {
     temp: number;
+    humidity: number;
+  };
+  weather: {
     description: string;
-    sys: {
-      country: string;
-    };
-    main: {
-      temp: number;
-    };
-    weather: {
-      description: string;
-    }[];
-  }
+  }[];
+  wind: {
+    speed: number;
+  };
+}
