@@ -6,6 +6,7 @@ import { FactoryClassTimeOfDay} from '../factory/factoryClassTimeOfDay';
 import { TimeOfDaBgClass } from '../enums/enumForTimeOfDay';
 import { Weather } from '../interfaces/WeatherDataInterfaces';
 import { Position } from '../interfaces/position';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-weather',
@@ -17,7 +18,8 @@ export class WeatherComponent implements OnInit {
   weatherData!: Weather;
   timeOfDay: TimeOfDaBgClass = TimeOfDaBgClass.MORNING;
   private factoryClassTimeOfDay : FactoryClassTimeOfDay = new FactoryClassTimeOfDay();
-
+  private weatherUpdateSubscription: Subscription | null = null;
+  
   constructor(
     private weatherService: WeatherDataService,
     private geolocationService: GeolocationService,
@@ -26,9 +28,17 @@ export class WeatherComponent implements OnInit {
   ngOnInit() {
     this.getWeatherData();
     this.updateTimeOfDay();
-    const timeOfDayFactory = new FactoryClassTimeOfDay();
-    const timeOfDay: TimeOfDaBgClass = timeOfDayFactory.setTimeOfDay();
-    console.log(timeOfDay);
+
+    this.weatherUpdateSubscription = interval(1 * 60 * 1000).subscribe(() => {
+      this.getWeatherData();
+      console.log('Данные обновлены');
+    });    
+  }
+
+  ngOnDestroy() {
+    if(this.weatherUpdateSubscription) {
+      this.weatherUpdateSubscription.unsubscribe();
+    }
   }
 
   getWeatherData() {

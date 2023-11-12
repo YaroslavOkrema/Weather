@@ -9,13 +9,13 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav opened="true" mode="side">
         <mat-nav-list>
-            <a mat-list-item>Main</a>
-            <a mat-list-item>Widget</a>
-        </mat-nav-list>
+            <a routerLink="/weather" mat-list-item>Main</a>
+            <a routerLink="/widget" mat-list-item>Widget</a>
+          </mat-nav-list>          
     </mat-sidenav>
     <mat-sidenav-content>
         <div style="height: 93vh;">
-            <app-weather></app-weather>
+            <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
