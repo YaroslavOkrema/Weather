@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<div class="container">
-    <form>
-        <input type="text" name="cityName" placeholder="Enter a city name" [(ngModel)]="city">
-        <button type="button" (click)="getWeather()">Get Weather</button>
-        <div *ngIf="weatherData">
-            <h2>{{weatherData.name}}</h2>
-            <p>{{weatherData.main.temp}}°</p>
-            <p>{{weatherData.weather[0].description}}</p>
-            <p>{{weatherData.main.temp_min}}°</p>
-            <p>{{weatherData.main.temp_max}}°</p>
-        </div>
-    </form>
+<div class="flex-container">
+    <div *ngFor="let widget of widgets" class="container">
+        <form>
+          <input type="text" name="cityName" placeholder="Введите название города" [(ngModel)]="widget.city">
+          <button type="button" (click)="getWeather(widget)">Get weather</button>
+          <div *ngIf="widget.weatherData">
+            <h2>{{widget.weatherData.name}}</h2>
+            <p>{{widget.weatherData.main.temp}}°</p>
+            <p>{{widget.weatherData.weather[0].description}}</p>
+            <p>{{widget.weatherData.main.temp_min}}°</p>
+            <p>{{widget.weatherData.main.temp_max}}°</p>
+          </div>
+        </form>
+      </div>
 </div>

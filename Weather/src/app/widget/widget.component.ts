@@ -10,21 +10,26 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class WidgetComponent {
   city!: string;
-  weatherData!: WidgetData;
+  widgets: { city: string, weatherData: WidgetData | null }[] = [
+    { city: '', weatherData: null },
+    { city: '', weatherData: null },
+    { city: '', weatherData: null }
+  ];
 
   constructor(private widgetDataService: WidgetDataService) { }
 
   ngOnInit(){}
 
-  getWeather() {
-    this.widgetDataService.getWeather(this.city)
-    .subscribe(data => {
-      this.weatherData = data as WidgetData;
-      console.log(data);
-    },
-    (error: HttpErrorResponse) => {
-      console.error('Error', error)
-    }
-  );
- }
+  getWeather(widget: { city: string, weatherData: WidgetData | null }) {
+    this.widgetDataService.getWeather(widget.city)
+      .subscribe(
+        (data: Object) => {
+          widget.weatherData = data as WidgetData;
+          console.log(data);
+        },
+        (error: HttpErrorResponse) => {
+          console.error('Error', error);
+        }
+      );
+  }
 }

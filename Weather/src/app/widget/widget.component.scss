@@ -1,9 +1,17 @@
 .container {
-   display: block;
+   margin-left: 60px;
    border-radius: 10px;
    width: 220px;
    height: 332px;
    color: white;
    background: blueviolet; 
    text-align: center;
+   overflow: hidden;
+}
+
+.flex-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 90vh;
 }
