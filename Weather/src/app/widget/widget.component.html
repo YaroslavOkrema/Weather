@@ -2,14 +2,25 @@
 <div class="flex-container">
     <div *ngFor="let widget of widgets" class="container">
         <form>
-          <input type="text" name="cityName" placeholder="Введите название города" [(ngModel)]="widget.city">
-          <button type="button" (click)="getWeather(widget)">Get weather</button>
+          <input class="widget__input custom-placeholder" type="text" name="cityName" placeholder="Enter city name" [(ngModel)]="widget.city" *ngIf="!weatherButtonClicked[widget.city]">
+          <button class="widget__button" type="button" (click)="getWeather(widget)" *ngIf="!weatherButtonClicked[widget.city]">Get weather</button>
           <div *ngIf="widget.weatherData">
-            <h2>{{widget.weatherData.name}}</h2>
-            <p>{{widget.weatherData.main.temp}}°</p>
-            <p>{{widget.weatherData.weather[0].description}}</p>
-            <p>{{widget.weatherData.main.temp_min}}°</p>
-            <p>{{widget.weatherData.main.temp_max}}°</p>
+            <h2 class="widget__title">{{widget.weatherData.name}}</h2>
+            <img class="widget__img" [src]="getIconUrl(widget.weatherData)" alt="Weather Icon">
+            <p class="widget__temp">{{widget.weatherData.main.temp}}°</p>
+            <p class="widget__description">{{widget.weatherData.weather[0].description}}</p>
+            <div class="widget__temp-info">
+              <div class="widget__temp-min">
+                <span class="widget__arrowMin">&#9662;</span>
+                <p class="widget__temMin">{{widget.weatherData.main.temp_min}}°</p>
+                <span class="widget__temMinTitle">Min</span>
+              </div>
+              <div class="widget__temp-max">
+                <span class="widget__arrowMax">&#9652;</span>
+                <p class="widget__temMax">{{widget.weatherData.main.temp_max}}°</p>
+                <span class="widget__temMaxTitle">Max</span>
+              </div>
+            </div>
           </div>
         </form>
       </div>

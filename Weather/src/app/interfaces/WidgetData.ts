@@ -13,5 +13,6 @@ export interface WidgetData {
     };
     weather: {
       description: string;
+      icon: string;
     }[];
   }

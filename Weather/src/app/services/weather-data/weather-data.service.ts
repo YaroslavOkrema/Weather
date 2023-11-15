@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs';
 import { Weather } from 'src/app/interfaces/WeatherDataInterfaces';
 
 @Injectable({
@@ -16,6 +17,11 @@ export class WeatherDataService {
     const apiKey = '642c1ad128fd816bcb4ea30d07064974';
     const units = 'metric';
     const url = `${this.apiUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
-    return this.http.get<Weather>(url);
+    return this.http.get<Weather>(url).pipe(
+      map(weather => {
+        weather.main.temp = Math.round(weather.main.temp);
+        return weather;
+      })
+    );
   }
 }

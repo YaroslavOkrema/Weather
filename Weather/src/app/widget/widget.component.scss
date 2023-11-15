@@ -1,3 +1,10 @@
+.flex-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 60vh;
+}
+
 .container {
    margin-left: 60px;
    border-radius: 10px;
@@ -9,9 +16,77 @@
    overflow: hidden;
 }
 
-.flex-container {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   height: 90vh;
+.widget__input {
+   margin-top: 100px;
+   margin-bottom: 10px;
+   height: 30px;
+   background-color: slategrey;
+   color: white;
+   border: 0;
 }
+
+.custom-placeholder::placeholder {
+   color: white;
+}
+
+.widget__button {
+   padding: 10px 15px;
+   border: 0;
+   background-color: rgb(176, 141, 209);
+   cursor: pointer;
+   color: white;
+   border-radius: 5px;
+   transition: 0.3s linear;
+}
+
+.widget__button:hover {
+   background-color: rgb(52, 22, 80)
+}
+
+.widget__title {
+   margin-top: 15px;
+}
+
+.widget__img {
+   width: 100px;
+   height: 100px;
+   margin-bottom: 10px;
+}
+
+.widget__temp {
+   font-size: 40px;
+}
+
+.widget__description {
+   font-size: 12px;
+}
+
+.widget__temp-info {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+ }
+ 
+ .widget__temp-min,
+ .widget__temp-max {
+   text-align: center;
+   padding: 0 30px;
+ }
+
+ .widget__arrowMin {
+   font-size: 30px;
+   color: green;
+ }
+
+ .widget__temMinTitle {
+   color: green;
+ }
+
+ .widget__arrowMax {
+   font-size: 30px;
+   color: red;
+ }
+
+ .widget__temMaxTitle {
+   color: red;
+ }

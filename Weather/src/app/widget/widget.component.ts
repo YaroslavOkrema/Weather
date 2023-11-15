@@ -15,6 +15,7 @@ export class WidgetComponent {
     { city: '', weatherData: null },
     { city: '', weatherData: null }
   ];
+  weatherButtonClicked: { [key: string]: boolean } = {};
 
   constructor(private widgetDataService: WidgetDataService) { }
 
@@ -31,5 +32,15 @@ export class WidgetComponent {
           console.error('Error', error);
         }
       );
+      this.weatherButtonClicked[widget.city] = true;
+  }
+
+  getIconUrl(weatherData: WidgetData): string {
+    if (weatherData && weatherData.weather && weatherData.weather.length > 0) {
+      const iconCode = weatherData.weather[0].icon;
+      return `https://openweathermap.org/img/wn/${iconCode}.png`;
+    } else {
+      return 'https://openweathermap.org/img/wn/01d.png';
+    }
   }
 }
