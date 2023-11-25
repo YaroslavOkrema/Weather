@@ -1,28 +1,26 @@
 .flex-container {
    display: flex;
-   justify-content: center;
+   justify-content: space-evenly;
    align-items: center;
    height: 60vh;
 }
 
 .container {
-   margin-left: 60px;
-   border-radius: 10px;
-   width: 220px;
-   height: 332px;
-   color: white;
-   background: blueviolet; 
+   border-radius: 10%;
+   width: 252px;
+   height: 370px;
+   color: black;
+   background: white; 
    text-align: center;
    overflow: hidden;
+   box-shadow: 0 0 18px rgba(0, 0, 0, 0.1);
 }
 
 .widget__input {
    margin-top: 100px;
    margin-bottom: 10px;
    height: 30px;
-   background-color: slategrey;
-   color: white;
-   border: 0;
+   border: 2px solid #3498db;
 }
 
 .custom-placeholder::placeholder {
@@ -32,7 +30,7 @@
 .widget__button {
    padding: 10px 15px;
    border: 0;
-   background-color: rgb(176, 141, 209);
+   background-color: #3498db;
    cursor: pointer;
    color: white;
    border-radius: 5px;
@@ -61,6 +59,14 @@
    font-size: 12px;
 }
 
+.widget__temMin {
+   font-size: 20px;
+}
+
+.widget__temMax {
+   font-size: 20px;
+}
+
 .widget__temp-info {
    display: flex;
    justify-content: space-between;
@@ -70,7 +76,7 @@
  .widget__temp-min,
  .widget__temp-max {
    text-align: center;
-   padding: 0 30px;
+   padding: 0 50px;
  }
 
  .widget__arrowMin {
@@ -89,4 +95,23 @@
 
  .widget__temMaxTitle {
    color: red;
+ }
+
+ .invalid {
+   border: 1px solid red;
+ }
+
+ .widhet__ivalid {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 11px;
+   color: red;
+   margin-right: 58px;
+   margin-bottom: 10px;
+ }
+
+ .valid__warning {
+   padding-left: 5px;
+   padding-top: 2.5px;
  }

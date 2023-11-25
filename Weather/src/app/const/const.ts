@@ -1,0 +1,1 @@
+export const TIME_UPDATE_WEATHER = 10000;

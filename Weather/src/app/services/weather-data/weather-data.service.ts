@@ -19,7 +19,9 @@ export class WeatherDataService {
     const url = `${this.apiUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
     return this.http.get<Weather>(url).pipe(
       map(weather => {
-        weather.main.temp = Math.round(weather.main.temp);
+        const {main, wind} = weather;
+        main.temp = Math.round(main.temp);
+        wind.speed = Math.round(wind.speed);
         return weather;
       })
     );

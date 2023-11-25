@@ -3,16 +3,22 @@ export interface WidgetData {
     name: string;
     temp: number;
     description: string;
-    sys: {
-      country: string;
-    };
-    main: {
-      temp: number;
-      temp_min: number;
-      temp_max: number;
-    };
-    weather: {
-      description: string;
-      icon: string;
-    }[];
+    sys: WidgetSys;
+    main: WidgetMain;
+    weather: WidgetWeather[];
+  }
+
+  export interface WidgetSys {
+    country: string;
+  }
+
+  export interface WidgetMain {
+    temp: number;
+    temp_min: number;
+    temp_max: number;
+  }
+
+  export interface WidgetWeather {
+    description: string;
+    icon: string;
   }

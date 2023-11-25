@@ -7,6 +7,7 @@ import { TimeOfDaBgClass } from '../enums/enumForTimeOfDay';
 import { Weather } from '../interfaces/WeatherDataInterfaces';
 import { Position } from '../interfaces/position';
 import { interval, Subscription } from 'rxjs';
+import { TIME_UPDATE_WEATHER } from '../const/const';
 
 @Component({
   selector: 'app-weather',
@@ -29,8 +30,9 @@ export class WeatherComponent implements OnInit {
     this.getWeatherData();
     this.updateTimeOfDay();
 
-    this.weatherUpdateSubscription = interval(1 * 60 * 1000).subscribe(() => {
+    this.weatherUpdateSubscription = interval(TIME_UPDATE_WEATHER).subscribe(() => {
       this.getWeatherData();
+      this.updateTimeOfDay();
       console.log('Данные обновлены');
     });    
   }

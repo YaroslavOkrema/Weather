@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { WidgetDataService } from '../services/widget-data/widget-data.service';
 import { WidgetData } from '../interfaces/WidgetData';
 import { HttpErrorResponse } from '@angular/common/http';
+import { WidgetInterface } from '../interfaces/WidgetInterface';
+import { WeatherButtonClicked } from '../interfaces/WidgetInterface';
+import { IsInvalidCity } from '../interfaces/WidgetInterface';
 
 @Component({
   selector: 'app-widget',
@@ -9,30 +12,48 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./widget.component.scss']
 })
 export class WidgetComponent {
-  city!: string;
-  widgets: { city: string, weatherData: WidgetData | null }[] = [
-    { city: '', weatherData: null },
-    { city: '', weatherData: null },
-    { city: '', weatherData: null }
+  widgets: WidgetInterface[] = [
+    { id: 1, city: '', weatherData: null },
+    { id: 2, city: '', weatherData: null },
+    { id: 3, city: '', weatherData: null }
   ];
-  weatherButtonClicked: { [key: string]: boolean } = {};
+
+  weatherButtonClicked: WeatherButtonClicked = {};
+  isInvalidCity: IsInvalidCity = {};
 
   constructor(private widgetDataService: WidgetDataService) { }
 
   ngOnInit(){}
 
-  getWeather(widget: { city: string, weatherData: WidgetData | null }) {
-    this.widgetDataService.getWeather(widget.city)
+  getWeather(widget: WidgetInterface) {
+    if (!widget.city.trim()) {
+      console.error('Введите название города');
+      return;
+    }
+
+    this.widgetDataService.getWeather(widget.city.trim())
       .subscribe(
-        (data: Object) => {
-          widget.weatherData = data as WidgetData;
+        (data: WidgetData) => {
+          widget.weatherData = data;
           console.log(data);
+          const { main } = widget.weatherData;
+          if (main && main.temp) {
+            main.temp = this.widgetDataService.roundTemperature(main.temp);
+            main.temp_max = this.widgetDataService.roundTemperature(main.temp_max);
+            main.temp_min = this.widgetDataService.roundTemperature(main.temp_min);
+          }
+
+          this.weatherButtonClicked[widget.id] = true;
+          this.isInvalidCity[widget.id] = false;
         },
         (error: HttpErrorResponse) => {
+          if (error.status === 404) {
+            this.isInvalidCity[widget.id] = true;
+          }
           console.error('Error', error);
+          this.weatherButtonClicked[widget.id] = false;
         }
       );
-      this.weatherButtonClicked[widget.city] = true;
   }
 
   getIconUrl(weatherData: WidgetData): string {
@@ -42,5 +63,9 @@ export class WidgetComponent {
     } else {
       return 'https://openweathermap.org/img/wn/01d.png';
     }
+  }
+
+  showInput(widget: WidgetInterface): boolean {
+    return widget.city.trim() === '' || !this.weatherButtonClicked[widget.id];
   }
 }

@@ -1,47 +1,70 @@
 .weather__container {
     padding: 20px;
-
-    width: 40%;
-    height: 40%;
-    border-radius: 10px;
-
-    position: absolute;
-    top: 25%;
-    right: 29%;
+    height: 88.6vh;
 }
 
 .weather__title {
-    font-size: 24px;
+    font-size: 34px;
     color: white;
     margin-bottom: 90px;
 }
 
 .weather__temperature {
     text-align: center;
-    font-size: 50px;
-    font-weight: 100;
+    font-size: 80px;
+    font-weight: 400;
     margin-top: 10px;
     color: white;
+    margin-bottom: 40px;
 }
 
 .weather__description {
     margin-bottom: 60px;
-    font-size: 18px;
-    font-weight: 100;
+    font-size: 30px;
+    font-weight: 400;
     margin-top: 18px;
     text-align: center;
     color: white;
 }
 
+.weather__info {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.weather__infoHumidity{
+    text-align: center;
+    font-size: 18px;
+    margin-top: 18px;
+    color: white;
+    padding: 0 10px
+}
+
+.weather__infoWind{
+  text-align: center;
+  font-size: 18px;
+  margin-top: 18px;
+  color: white;
+  padding: 0 10px
+}
+
+.weather__bamp {
+  text-align: center;
+  font-size: 100px;
+  font-weight: 100;
+  color: white;
+  padding: 0 10px
+}
+
 .weather__humidity {
-    text-align: right;
     font-size: 18px;
     margin-top: 18px;
     color: white;
 }
 
 .weather__wind {
-    text-align: right;
+    text-align: center;
     font-size: 18px;
     margin-top: 18px;
     color: white;
@@ -49,6 +72,7 @@
 
 .morning-bg {
   background-image: radial-gradient(circle at 90.95% 35.09%, #ffffff 0, #c1d4f0 50%, #5f88b9 100%);
+  height: 88.6vh;
 }
   
   .day-bg {
