@@ -1,41 +1,88 @@
 .weather__container {
     padding: 20px;
-    text-align: center;
+    height: 88.6vh;
 }
 
 .weather__title {
-    font-size: 24px;
+    font-size: 34px;
     color: white;
+    margin-bottom: 90px;
 }
 
 .weather__temperature {
-    font-size: 36px;
+    text-align: center;
+    font-size: 80px;
+    font-weight: 400;
     margin-top: 10px;
     color: white;
+    margin-bottom: 40px;
 }
 
 .weather__description {
+    margin-bottom: 60px;
+    font-size: 30px;
+    font-weight: 400;
+    margin-top: 18px;
+    text-align: center;
+    color: white;
+}
+
+.weather__info {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.weather__infoHumidity{
+    text-align: center;
+    font-size: 18px;
+    margin-top: 18px;
+    color: white;
+    padding: 0 10px
+}
+
+.weather__infoWind{
+  text-align: center;
+  font-size: 18px;
+  margin-top: 18px;
+  color: white;
+  padding: 0 10px
+}
+
+.weather__bamp {
+  text-align: center;
+  font-size: 100px;
+  font-weight: 100;
+  color: white;
+  padding: 0 10px
+}
+
+.weather__humidity {
+    font-size: 18px;
+    margin-top: 18px;
+    color: white;
+}
+
+.weather__wind {
+    text-align: center;
     font-size: 18px;
     margin-top: 18px;
     color: white;
 }
 
 .morning-bg {
-  background: url('../img/morning.PNG');
-    height: 100vh;
-  }
+  background-image: radial-gradient(circle at 90.95% 35.09%, #ffffff 0, #c1d4f0 50%, #5f88b9 100%);
+  height: 88.6vh;
+}
   
   .day-bg {
-    background: url('../img/day.PNG');
-    height: 100vh;
+    background-image: radial-gradient(circle at 90.95% 35.09%, #dfffff 0, #b5ebff 16.67%, #86d5f7 33.33%, #47bcee 50%, #00a3e6 66.67%, #008cdf 83.33%, #0076d8 100%);
   }
   
   .evening-bg {
-    background: url('../img/evening.PNG');
-    height: 100vh;
+    background-image: radial-gradient(circle at 90.95% 35.09%, #ffcd6a 0, #ffc262 12.5%, #fcb257 25%, #f49f49 37.5%, #e98837 50%, #dd7027 62.5%, #d55b1f 75%, #cf491d 87.5%, #cd3820 100%);
   }
   
   .night-bg {
-    background: url('../img/night.PNG');
-    height: 100vh;
+    background-image: radial-gradient(circle at 90.95% 35.09%, #55524b 0, #0a1320 50%, #000000 100%);
   }

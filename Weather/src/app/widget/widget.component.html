@@ -1,0 +1,50 @@
+<div class="flex-container">
+  <div *ngFor="let widget of widgets; let i = index" class="container">
+      <form>
+        <ng-container *ngIf="showInput(widget)">
+          <input 
+            class="widget__input custom-placeholder" 
+            type="text" name="cityName" 
+            placeholder="Enter city name" 
+            [(ngModel)]="widget.city" 
+            [class.invalid]="isInvalidCity[widget.id]">
+        </ng-container>
+        <div class="widhet__ivalid" *ngIf="isInvalidCity[widget.id]">
+            <svg aria-hidden="true" 
+            class="stUf5b qpSchb" 
+            fill="currentColor" 
+            focusable="false" 
+            width="16px" 
+            height="16px" 
+            viewBox="0 0 24 24" 
+            xmlns="https://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path>
+          </svg>
+          <div class="valid__warning">
+            Сould not find the city
+          </div>
+        </div>
+        <ng-container *ngIf="!weatherButtonClicked[widget.id]">
+          <button class="widget__button" type="button" (click)="getWeather(widget)">Get weather</button>
+        </ng-container>
+        <div *ngIf="widget.weatherData">
+          <h2 class="widget__title">{{widget.weatherData.name}}</h2>
+          <img class="widget__img" [src]="getIconUrl(widget.weatherData)" alt="Weather Icon">
+          <p class="widget__temp">{{widget.weatherData.main.temp}}°</p>
+          <p class="widget__description">{{widget.weatherData.weather[0].description}}</p>
+          <div class="widget__temp-info">
+            <div class="widget__temp-min">
+              <span class="widget__arrowMin">&#9662;</span>
+              <p class="widget__temMin">{{widget.weatherData.main.temp_min}}°</p>
+              <span class="widget__temMinTitle">Min</span>
+            </div>
+            <div class="widget__temp-max">
+              <span class="widget__arrowMax">&#9652;</span>
+              <p class="widget__temMax">{{widget.weatherData.main.temp_max}}°</p>
+              <span class="widget__temMaxTitle">Max</span>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+</div>

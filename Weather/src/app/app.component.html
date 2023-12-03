@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="white">
     <mat-toolbar-row>
         <button mat-icon-button (click)="sidenav.toggle()">
             <mat-icon>menu</mat-icon>
@@ -9,13 +9,13 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav opened="true" mode="side">
         <mat-nav-list>
-            <a mat-list-item>Main</a>
-            <a mat-list-item>Widget</a>
-        </mat-nav-list>
+            <a routerLink="/weather" mat-list-item>Main</a>
+            <a routerLink="/widget" mat-list-item>Widget</a>
+          </mat-nav-list>          
     </mat-sidenav>
     <mat-sidenav-content>
-        <div style="height: 88vh;">
-            <app-weather></app-weather>
+        <div>
+            <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>

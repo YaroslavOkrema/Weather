@@ -7,18 +7,19 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
-import { GeolocationService } from './services/geolocation/geolocation.service';
-
+import { FormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
 import { WeatherComponent } from './weather/weather.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { WidgetComponent } from './widget/widget.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WeatherComponent,
+    WidgetComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +30,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatIconModule,
     MatSidenavModule,
     MatListModule,
-    MatButtonModule 
+    MatButtonModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

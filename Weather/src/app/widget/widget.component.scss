@@ -1,0 +1,117 @@
+.flex-container {
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+   height: 60vh;
+}
+
+.container {
+   border-radius: 10%;
+   width: 252px;
+   height: 370px;
+   color: black;
+   background: white; 
+   text-align: center;
+   overflow: hidden;
+   box-shadow: 0 0 18px rgba(0, 0, 0, 0.1);
+}
+
+.widget__input {
+   margin-top: 100px;
+   margin-bottom: 10px;
+   height: 30px;
+   border: 2px solid #3498db;
+}
+
+.custom-placeholder::placeholder {
+   color: white;
+}
+
+.widget__button {
+   padding: 10px 15px;
+   border: 0;
+   background-color: #3498db;
+   cursor: pointer;
+   color: white;
+   border-radius: 5px;
+   transition: 0.3s linear;
+}
+
+.widget__button:hover {
+   background-color: rgb(52, 22, 80)
+}
+
+.widget__title {
+   margin-top: 15px;
+}
+
+.widget__img {
+   width: 100px;
+   height: 100px;
+   margin-bottom: 10px;
+}
+
+.widget__temp {
+   font-size: 40px;
+}
+
+.widget__description {
+   font-size: 12px;
+}
+
+.widget__temMin {
+   font-size: 20px;
+}
+
+.widget__temMax {
+   font-size: 20px;
+}
+
+.widget__temp-info {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+ }
+ 
+ .widget__temp-min,
+ .widget__temp-max {
+   text-align: center;
+   padding: 0 50px;
+ }
+
+ .widget__arrowMin {
+   font-size: 30px;
+   color: green;
+ }
+
+ .widget__temMinTitle {
+   color: green;
+ }
+
+ .widget__arrowMax {
+   font-size: 30px;
+   color: red;
+ }
+
+ .widget__temMaxTitle {
+   color: red;
+ }
+
+ .invalid {
+   border: 1px solid red;
+ }
+
+ .widhet__ivalid {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 11px;
+   color: red;
+   margin-right: 58px;
+   margin-bottom: 10px;
+ }
+
+ .valid__warning {
+   padding-left: 5px;
+   padding-top: 2.5px;
+ }
