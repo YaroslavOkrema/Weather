@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { WidgetInterface } from '../interfaces/WidgetInterface';
 import { WeatherButtonClicked } from '../interfaces/WidgetInterface';
 import { IsInvalidCity } from '../interfaces/WidgetInterface';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-widget',
@@ -20,10 +21,11 @@ export class WidgetComponent {
 
   weatherButtonClicked: WeatherButtonClicked = {};
   isInvalidCity: IsInvalidCity = {};
+  private weatherSubscription: Subscription = new Subscription();
 
   constructor(private widgetDataService: WidgetDataService) { }
 
-  ngOnInit(){}
+  ngOnInit(){ }
 
   getWeather(widget: WidgetInterface) {
     if (!widget.city.trim()) {
@@ -54,6 +56,12 @@ export class WidgetComponent {
           this.weatherButtonClicked[widget.id] = false;
         }
       );
+  }
+
+  ngOnDestroy() {
+    if (this.weatherSubscription) {
+      this.weatherSubscription.unsubscribe();
+    }
   }
 
   getIconUrl(weatherData: WidgetData): string {
