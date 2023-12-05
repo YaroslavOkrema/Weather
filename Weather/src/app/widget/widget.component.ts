@@ -5,7 +5,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { WidgetInterface } from '../interfaces/WidgetInterface';
 import { WeatherButtonClicked } from '../interfaces/WidgetInterface';
 import { IsInvalidCity } from '../interfaces/WidgetInterface';
-import { Subscription } from 'rxjs';
+import { Subscription, interval } from 'rxjs';
+import { TIME_UPDATE_WEATHER } from '../const/const';
 
 @Component({
   selector: 'app-widget',
@@ -21,11 +22,22 @@ export class WidgetComponent {
 
   weatherButtonClicked: WeatherButtonClicked = {};
   isInvalidCity: IsInvalidCity = {};
-  private weatherSubscription: Subscription = new Subscription();
+  private weatherUpdateSubscription: Subscription | null = null;
 
   constructor(private widgetDataService: WidgetDataService) { }
 
-  ngOnInit(){ }
+  ngOnInit(){
+    this.weatherUpdateSubscription = interval(TIME_UPDATE_WEATHER).subscribe(() => {
+      this.widgets.forEach(widget => this.getWeather(widget));
+      console.log('Данные обновлены');
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.weatherUpdateSubscription) {
+      this.weatherUpdateSubscription.unsubscribe();
+    }
+  }
 
   getWeather(widget: WidgetInterface) {
     if (!widget.city.trim()) {
@@ -56,12 +68,6 @@ export class WidgetComponent {
           this.weatherButtonClicked[widget.id] = false;
         }
       );
-  }
-
-  ngOnDestroy() {
-    if (this.weatherSubscription) {
-      this.weatherSubscription.unsubscribe();
-    }
   }
 
   getIconUrl(weatherData: WidgetData): string {
