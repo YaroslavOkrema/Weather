@@ -8,6 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -19,7 +21,7 @@ import { WidgetComponent } from './widget/widget.component';
   declarations: [
     AppComponent,
     WeatherComponent,
-    WidgetComponent,
+    WidgetComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,9 @@ import { WidgetComponent } from './widget/widget.component';
     MatSidenavModule,
     MatListModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    MatSlideToggleModule,
+    ReactiveFormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

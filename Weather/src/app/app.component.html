@@ -1,9 +1,13 @@
 <mat-toolbar color="white">
-    <mat-toolbar-row>
+    <mat-toolbar-row class="toolbar">
         <button mat-icon-button (click)="sidenav.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
         <h1>Weather</h1>
+        <span class="theme__switch">
+            Dark
+            <mat-slide-toggle [formControl]="switchTheme"></mat-slide-toggle>
+        </span>
     </mat-toolbar-row>
 </mat-toolbar>
 <mat-sidenav-container>

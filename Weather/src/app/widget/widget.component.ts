@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { WidgetDataService } from '../services/widget-data/widget-data.service';
 import { WidgetData } from '../interfaces/WidgetData';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -8,29 +8,35 @@ import { IsInvalidCity } from '../interfaces/WidgetInterface';
 import { Subscription, interval } from 'rxjs';
 import { TIME_UPDATE_WEATHER } from '../const/const';
 
+
 @Component({
   selector: 'app-widget',
   templateUrl: './widget.component.html',
   styleUrls: ['./widget.component.scss']
 })
-export class WidgetComponent {
+export class WidgetComponent implements OnInit, OnDestroy {
   widgets: WidgetInterface[] = [
     { id: 1, city: '', weatherData: null },
     { id: 2, city: '', weatherData: null },
     { id: 3, city: '', weatherData: null }
   ];
-
   weatherButtonClicked: WeatherButtonClicked = {};
   isInvalidCity: IsInvalidCity = {};
   private weatherUpdateSubscription: Subscription | null = null;
+  isInitialLoad = true;
 
   constructor(private widgetDataService: WidgetDataService) { }
 
   ngOnInit(){
+    this.loadFromLocalStorage();
+
     this.weatherUpdateSubscription = interval(TIME_UPDATE_WEATHER).subscribe(() => {
       this.widgets.forEach(widget => this.getWeather(widget));
       console.log('Данные обновлены');
+      this.saveToLocalStorage();
     });
+    this.widgets.forEach(widget => this.getWeather(widget));
+    this.loadFromLocalStorage();
   }
 
   ngOnDestroy() {
@@ -59,6 +65,7 @@ export class WidgetComponent {
 
           this.weatherButtonClicked[widget.id] = true;
           this.isInvalidCity[widget.id] = false;
+          this.saveToLocalStorage();
         },
         (error: HttpErrorResponse) => {
           if (error.status === 404) {
@@ -80,6 +87,28 @@ export class WidgetComponent {
   }
 
   showInput(widget: WidgetInterface): boolean {
-    return widget.city.trim() === '' || !this.weatherButtonClicked[widget.id];
+    return (this.isInitialLoad && widget.city.trim() === '') || !this.weatherButtonClicked[widget.id];
+  }
+
+  saveToLocalStorage() {
+    localStorage.setItem('widgetsData', JSON.stringify(this.widgets));
+  }
+
+  loadFromLocalStorage() {
+    const saveData = localStorage.getItem('widgetsData');
+    if(saveData) {
+      this.widgets = JSON.parse(saveData);
+    }
+  }
+
+  clearWidgets() {
+    this.widgets.forEach(widget => {
+      widget.city = '';
+      widget.weatherData = null;
+    });
+    this.isInvalidCity = {};
+    this.weatherButtonClicked = {};
+    this.isInitialLoad = true;
+    this.saveToLocalStorage();
   }
 }
