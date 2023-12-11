@@ -9,11 +9,9 @@
    border-radius: 10%;
    width: 252px;
    height: 370px;
-   color: black;
-   background: white; 
    text-align: center;
    overflow: hidden;
-   box-shadow: 0 0 18px rgba(0, 0, 0, 0.1);
+   box-shadow: 0 0 18px rgba(0, 0, 0, 0.5);
 }
 
 .widget__input {
@@ -21,10 +19,6 @@
    margin-bottom: 10px;
    height: 30px;
    border: 2px solid #3498db;
-}
-
-.custom-placeholder::placeholder {
-   color: white;
 }
 
 .widget__button {
@@ -110,8 +104,14 @@
    margin-right: 58px;
    margin-bottom: 10px;
  }
- 
+
  .btn__container {
    display: flex;
    justify-content: center;
+ }
+
+ .plus__btn {
+   margin-top: 120px;
+   background-color: #3498db;
+   color: white;
  }

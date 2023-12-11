@@ -16,14 +16,16 @@ import { TIME_UPDATE_WEATHER } from '../const/const';
 })
 export class WidgetComponent implements OnInit, OnDestroy {
   widgets: WidgetInterface[] = [
-    { id: 1, city: '', weatherData: null },
-    { id: 2, city: '', weatherData: null },
-    { id: 3, city: '', weatherData: null }
+    { id: 1, city: '', weatherData: null, showForm: false, showButton: true },
+    { id: 2, city: '', weatherData: null, showForm: false, showButton: true },
+    { id: 3, city: '', weatherData: null, showForm: false, showButton: true }
   ];
   weatherButtonClicked: WeatherButtonClicked = {};
   isInvalidCity: IsInvalidCity = {};
   private weatherUpdateSubscription: Subscription | null = null;
   isInitialLoad = true;
+  showForm: boolean = false;
+  showButton: boolean = true;
 
   constructor(private widgetDataService: WidgetDataService) { }
 
@@ -110,5 +112,17 @@ export class WidgetComponent implements OnInit, OnDestroy {
     this.weatherButtonClicked = {};
     this.isInitialLoad = true;
     this.saveToLocalStorage();
+  }
+
+  toggleForm(widget: WidgetInterface) {
+    this.showForm = !this.showForm;
+    this.showButton = !this.showButton;
+  }
+
+  handleClick(id: number) {
+    const clickedWidget = this.widgets.find(widget => widget.id === id);
+    if(clickedWidget) {
+      this.toggleForm(clickedWidget);
+    }
   }
 }

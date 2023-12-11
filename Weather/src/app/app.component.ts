@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit, AfterViewInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { OverlayContainer } from '@angular/cdk/overlay'
 
@@ -7,7 +7,7 @@ import { OverlayContainer } from '@angular/cdk/overlay'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   switchTheme = new FormControl(false);
   @HostBinding('class') className = '';
   darkClass = 'theme-dark';
@@ -15,6 +15,9 @@ export class AppComponent implements OnInit {
 
   constructor(private overlay: OverlayContainer) {}
   ngOnInit() {
+    this. loadTheme();
+  }
+  ngAfterViewInit() {
     this.switchTheme.valueChanges.subscribe((currentMode) => {
       this.className = currentMode ? this.darkClass : this.lightClass;
 
@@ -23,6 +26,19 @@ export class AppComponent implements OnInit {
       } else {
         this.overlay.getContainerElement().classList.remove(this.darkClass);
       }
+
+      localStorage.setItem('theme', currentMode ? 'dark' : 'light');
     });
+  }
+
+  loadTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    this.className = savedTheme === 'dark' ? this.darkClass : this.lightClass;
+
+    if(savedTheme === 'dark') {
+      this.switchTheme.patchValue(true);
+    } else {
+      this.switchTheme.patchValue(false);
+    }
   }
 }
