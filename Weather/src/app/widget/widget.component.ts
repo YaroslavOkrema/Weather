@@ -26,11 +26,16 @@ export class WidgetComponent implements OnInit, OnDestroy {
   isInitialLoad = true;
   showForm: boolean = false;
   showButton: boolean = true;
+  widgetStates: { [id: number]: { showForm: boolean; showButton: boolean } } = {};
 
   constructor(private widgetDataService: WidgetDataService) { }
 
   ngOnInit(){
     this.loadFromLocalStorage();
+
+    if(this.widgets.some(widget => widget.weatherData)) {
+      this.showButton = false;
+    }
 
     this.weatherUpdateSubscription = interval(TIME_UPDATE_WEATHER).subscribe(() => {
       this.widgets.forEach(widget => this.getWeather(widget));
@@ -107,22 +112,23 @@ export class WidgetComponent implements OnInit, OnDestroy {
     this.widgets.forEach(widget => {
       widget.city = '';
       widget.weatherData = null;
+      widget.showForm = false;
+      widget.showButton = true
     });
+
     this.isInvalidCity = {};
     this.weatherButtonClicked = {};
     this.isInitialLoad = true;
+
     this.saveToLocalStorage();
   }
-
-  toggleForm(widget: WidgetInterface) {
-    this.showForm = !this.showForm;
-    this.showButton = !this.showButton;
-  }
-
-  handleClick(id: number) {
-    const clickedWidget = this.widgets.find(widget => widget.id === id);
-    if(clickedWidget) {
-      this.toggleForm(clickedWidget);
+  
+  toggleForm(widgetId: number) {
+    const widget = this.widgets.find(w => w.id === widgetId);
+  
+    if (widget) {
+      widget.showForm = !widget.showForm;
+      widget.showButton = !widget.showButton;
     }
   }
 }

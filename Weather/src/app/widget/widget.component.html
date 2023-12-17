@@ -1,10 +1,10 @@
 <div class="flex-container">
   <div *ngFor="let widget of widgets; let i = index" class="container">
-      <button mat-icon-button class="plus__btn" *ngIf="showButton" (click)="handleClick(widget.id)">
-        <mat-icon>add</mat-icon>
+      <button mat-icon-button class="plus__btn" *ngIf="widget.showButton" (click)="toggleForm(widget.id)">
+        <div class="icon__btn">+</div>
       </button>
       <form>
-        <ng-container *ngIf="showInput(widget) && showForm">
+        <ng-container *ngIf="showInput(widget) && widget.showForm">
           <input 
             class="widget__input custom-placeholder" 
             type="text" name="cityName" 
@@ -27,7 +27,7 @@
             Сould not find the city
           </div>
         </div>
-        <ng-container *ngIf="!weatherButtonClicked[widget.id] && showForm">
+        <ng-container *ngIf="!weatherButtonClicked[widget.id] && widget.showForm">
           <button class="widget__button" type="button" (click)="getWeather(widget)">Get weather</button>
         </ng-container>
         <div *ngIf="widget.weatherData">
