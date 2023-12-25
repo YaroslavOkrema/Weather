@@ -12,6 +12,7 @@
    text-align: center;
    overflow: hidden;
    box-shadow: 0 0 18px rgba(0, 0, 0, 0.5);
+   margin: 0 50px;
 }
 
 .widget__input {
@@ -122,3 +123,7 @@
    font-size: 50px;
    text-align: center !important;
  }
+
+ .carousel {
+   display: flex;
+}

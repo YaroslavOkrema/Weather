@@ -35,7 +35,7 @@ import { WidgetComponent } from './widget/widget.component';
     MatButtonModule,
     FormsModule,
     MatSlideToggleModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
