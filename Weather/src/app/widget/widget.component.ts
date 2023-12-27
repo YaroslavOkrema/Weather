@@ -131,4 +131,13 @@ export class WidgetComponent implements OnInit, OnDestroy {
       widget.showButton = !widget.showButton;
     }
   }
+
+  ngbCarouselOptions = {
+    interval: 0,
+    pauseOnHover: true,
+    wrap: true,
+    keyboard: true,
+    showNavigationArrows: true,
+    showNavigationIndicators: false
+  };
 }
