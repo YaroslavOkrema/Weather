@@ -1,13 +1,13 @@
-<ngb-carousel *ngIf="widgets.length === 3" 
+<ngb-carousel *ngIf="widgets.length > 0" 
   [interval]="ngbCarouselOptions.interval"
   [pauseOnHover]="ngbCarouselOptions.pauseOnHover" 
   [wrap]="ngbCarouselOptions.wrap" 
   [keyboard]="ngbCarouselOptions.keyboard" 
   [showNavigationArrows]="ngbCarouselOptions.showNavigationArrows" 
   [showNavigationIndicators]="ngbCarouselOptions.showNavigationIndicators">
-    <ng-template ngbSlide *ngFor="let widget of widgets; let i = index">
+    <ng-template *ngFor="let widget of widgets" ngbSlide>
       <div class="flex-container">
-        <div *ngFor="let widget of widgets; let i = index" class="container">
+        <div class="container">
             <button mat-icon-button class="plus__btn" *ngIf="widget.showButton" (click)="toggleForm(widget.id)">
               <div class="icon__btn">+</div>
             </button>
@@ -62,5 +62,7 @@
     </ng-template>
 </ngb-carousel>
 <div class="btn__container">
-  <button mat-raised-button color="primary" (click)="clearWidgets()">Clear widgets</button>
+  <button mat-raised-button color="primary" (click)="clearWidgets()">Clear</button>
+  <button mat-raised-button color="primary" (click)="addWidgets()">Add</button>
+  <button mat-raised-button color="primary" (click)="removeWidget()">Remove</button>
 </div>

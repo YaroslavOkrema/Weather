@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { WidgetDataService } from '../services/widget-data/widget-data.service';
 import { WidgetData } from '../interfaces/WidgetData';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -7,6 +7,7 @@ import { WeatherButtonClicked } from '../interfaces/WidgetInterface';
 import { IsInvalidCity } from '../interfaces/WidgetInterface';
 import { Subscription, interval } from 'rxjs';
 import { TIME_UPDATE_WEATHER } from '../const/const';
+import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -122,7 +123,19 @@ export class WidgetComponent implements OnInit, OnDestroy {
 
     this.saveToLocalStorage();
   }
-  
+
+  addWidgets() {
+    const newWidget: WidgetInterface = {id: this.widgets.length + 1, city: '', weatherData: null, showForm: false, showButton: true};
+    this.widgets.push(newWidget);
+  }
+
+  removeWidget() {
+    if (this.widgets.length > 0) {
+      const removedWidget = this.widgets.pop();
+      console.log('Removed widget:', removedWidget);
+    }
+  }
+
   toggleForm(widgetId: number) {
     const widget = this.widgets.find(w => w.id === widgetId);
   
@@ -138,6 +151,6 @@ export class WidgetComponent implements OnInit, OnDestroy {
     wrap: true,
     keyboard: true,
     showNavigationArrows: true,
-    showNavigationIndicators: false
+    showNavigationIndicators: true,
   };
 }
