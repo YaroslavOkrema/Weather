@@ -16,7 +16,7 @@ import { AppComponent } from './app.component';
 import { WeatherComponent } from './weather/weather.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WidgetComponent } from './widget/widget.component';
-import { NgbModule, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [
@@ -37,8 +37,7 @@ import { NgbModule, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     MatSlideToggleModule,
     ReactiveFormsModule,
-    NgbModule,
-    NgbCarouselModule
+    SlickCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,25 +1,19 @@
-<ngb-carousel *ngIf="widgets.length > 0" 
-  [interval]="ngbCarouselOptions.interval"
-  [pauseOnHover]="ngbCarouselOptions.pauseOnHover" 
-  [wrap]="ngbCarouselOptions.wrap" 
-  [keyboard]="ngbCarouselOptions.keyboard" 
-  [showNavigationArrows]="ngbCarouselOptions.showNavigationArrows" 
-  [showNavigationIndicators]="ngbCarouselOptions.showNavigationIndicators">
-    <ng-template *ngFor="let widget of widgets" ngbSlide>
-      <div class="flex-container">
-        <div class="container">
-            <button mat-icon-button class="plus__btn" *ngIf="widget.showButton" (click)="toggleForm(widget.id)">
-              <div class="icon__btn">+</div>
-            </button>
-            <form>
-              <ng-container *ngIf="showInput(widget) && widget.showForm">
-                <input 
-                  class="widget__input custom-placeholder" 
-                  type="text" name="cityName" 
-                  placeholder="Enter city name" 
-                  [(ngModel)]="widget.city" 
-                  [class.invalid]="isInvalidCity[widget.id]">
-              </ng-container>
+<ngx-slick-carousel class="carousel" [config]="slideConfig">
+  <div *ngFor="let widget of widgets" class="slide" ngxSlickItem>
+    <div class="flex-container">
+      <div class="container">
+        <button mat-icon-button class="plus__btn" *ngIf="widget.showButton" (click)="toggleForm(widget.id)">
+          <div class="icon__btn">+</div>
+        </button>
+        <form>
+          <ng-container *ngIf="showInput(widget) && widget.showForm">
+            <input 
+              class="widget__input custom-placeholder" 
+              type="text" name="cityName" 
+              placeholder="Enter city name" 
+              [(ngModel)]="widget.city" 
+              [class.invalid]="isInvalidCity[widget.id]">
+          </ng-container>
               <div class="widhet__ivalid" *ngIf="isInvalidCity[widget.id]">
                   <svg aria-hidden="true" 
                   class="stUf5b qpSchb" 
@@ -55,12 +49,12 @@
                     <span class="widget__temMaxTitle">Max</span>
                   </div>
                 </div>
-              </div>
-            </form>
-          </div>
+            </div>
+        </form>
       </div>
-    </ng-template>
-</ngb-carousel>
+    </div>
+  </div>
+</ngx-slick-carousel>
 <div class="btn__container">
   <button mat-raised-button color="primary" (click)="clearWidgets()">Clear</button>
   <button mat-raised-button color="primary" (click)="addWidgets()">Add</button>

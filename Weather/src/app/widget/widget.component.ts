@@ -7,7 +7,6 @@ import { WeatherButtonClicked } from '../interfaces/WidgetInterface';
 import { IsInvalidCity } from '../interfaces/WidgetInterface';
 import { Subscription, interval } from 'rxjs';
 import { TIME_UPDATE_WEATHER } from '../const/const';
-import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -132,7 +131,6 @@ export class WidgetComponent implements OnInit, OnDestroy {
   removeWidget() {
     if (this.widgets.length > 0) {
       const removedWidget = this.widgets.pop();
-      console.log('Removed widget:', removedWidget);
     }
   }
 
@@ -145,12 +143,12 @@ export class WidgetComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngbCarouselOptions = {
-    interval: 0,
-    pauseOnHover: true,
-    wrap: true,
-    keyboard: true,
-    showNavigationArrows: true,
-    showNavigationIndicators: true,
-  };
+  slideConfig = {
+    slidesToShow: 3,       
+    slidesToScroll: 1,       
+    dots: true,              
+    infinite: true,           
+    autoplay: true,           
+    autoplaySpeed: 2000,
+  }
 }
