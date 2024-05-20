@@ -136,19 +136,10 @@ export class WidgetComponent implements OnInit, OnDestroy {
 
   toggleForm(widgetId: number) {
     const widget = this.widgets.find(w => w.id === widgetId);
-  
+
     if (widget) {
       widget.showForm = !widget.showForm;
       widget.showButton = !widget.showButton;
     }
-  }
-
-  slideConfig = {
-    slidesToShow: 3,       
-    slidesToScroll: 1,       
-    dots: true,              
-    infinite: true,           
-    autoplay: true,           
-    autoplaySpeed: 2000,
   }
 }
