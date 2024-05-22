@@ -66,10 +66,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Weather:build:production"
+              "buildTarget": "Weather:build:production"
             },
             "development": {
-              "browserTarget": "Weather:build:development"
+              "buildTarget": "Weather:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -77,7 +77,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Weather:build"
+            "buildTarget": "Weather:build"
           }
         },
         "test": {
@@ -95,9 +95,14 @@
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/slick-carousel/slick/slick.scss",
+              "node_modules/slick-carousel/slick/slick-theme.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/slick-carousel/slick/slick.min.js",
+              "node_modules/jquery/dist/jquery.min.js"
+            ]
           }
         }
       }

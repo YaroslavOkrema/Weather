@@ -1,29 +1,56 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { WidgetDataService } from '../services/widget-data/widget-data.service';
 import { WidgetData } from '../interfaces/WidgetData';
 import { HttpErrorResponse } from '@angular/common/http';
 import { WidgetInterface } from '../interfaces/WidgetInterface';
 import { WeatherButtonClicked } from '../interfaces/WidgetInterface';
 import { IsInvalidCity } from '../interfaces/WidgetInterface';
+import { Subscription, interval } from 'rxjs';
+import { TIME_UPDATE_WEATHER } from '../const/const';
+
 
 @Component({
   selector: 'app-widget',
   templateUrl: './widget.component.html',
   styleUrls: ['./widget.component.scss']
 })
-export class WidgetComponent {
+export class WidgetComponent implements OnInit, OnDestroy {
   widgets: WidgetInterface[] = [
-    { id: 1, city: '', weatherData: null },
-    { id: 2, city: '', weatherData: null },
-    { id: 3, city: '', weatherData: null }
+    { id: 1, city: '', weatherData: null, showForm: false, showButton: true },
+    { id: 2, city: '', weatherData: null, showForm: false, showButton: true },
+    { id: 3, city: '', weatherData: null, showForm: false, showButton: true }
   ];
-
   weatherButtonClicked: WeatherButtonClicked = {};
   isInvalidCity: IsInvalidCity = {};
+  private weatherUpdateSubscription: Subscription | null = null;
+  isInitialLoad = true;
+  showForm: boolean = false;
+  showButton: boolean = true;
+  widgetStates: { [id: number]: { showForm: boolean; showButton: boolean } } = {};
 
   constructor(private widgetDataService: WidgetDataService) { }
 
-  ngOnInit(){}
+  ngOnInit(){
+    this.loadFromLocalStorage();
+
+    if(this.widgets.some(widget => widget.weatherData)) {
+      this.showButton = false;
+    }
+
+    this.weatherUpdateSubscription = interval(TIME_UPDATE_WEATHER).subscribe(() => {
+      this.widgets.forEach(widget => this.getWeather(widget));
+      console.log('Данные обновлены');
+      this.saveToLocalStorage();
+    });
+    this.widgets.forEach(widget => this.getWeather(widget));
+    this.loadFromLocalStorage();
+  }
+
+  ngOnDestroy() {
+    if (this.weatherUpdateSubscription) {
+      this.weatherUpdateSubscription.unsubscribe();
+    }
+  }
 
   getWeather(widget: WidgetInterface) {
     if (!widget.city.trim()) {
@@ -45,6 +72,7 @@ export class WidgetComponent {
 
           this.weatherButtonClicked[widget.id] = true;
           this.isInvalidCity[widget.id] = false;
+          this.saveToLocalStorage();
         },
         (error: HttpErrorResponse) => {
           if (error.status === 404) {
@@ -66,6 +94,54 @@ export class WidgetComponent {
   }
 
   showInput(widget: WidgetInterface): boolean {
-    return widget.city.trim() === '' || !this.weatherButtonClicked[widget.id];
+    return (this.isInitialLoad && widget.city.trim() === '') || !this.weatherButtonClicked[widget.id];
+  }
+
+  saveToLocalStorage() {
+    localStorage.setItem('widgetsData', JSON.stringify(this.widgets));
+  }
+
+  loadFromLocalStorage() {
+    const saveData = localStorage.getItem('widgetsData');
+    if(saveData) {
+      this.widgets = JSON.parse(saveData);
+    }
+  }
+
+  clearWidgets() {
+    this.widgets.forEach(widget => {
+      widget.city = '';
+      widget.weatherData = null;
+      widget.showForm = false;
+      widget.showButton = true
+    });
+
+    this.isInvalidCity = {};
+    this.weatherButtonClicked = {};
+    this.isInitialLoad = true;
+
+    this.saveToLocalStorage();
+  }
+
+  addWidgets() {
+    const newWidget: WidgetInterface = {id: this.widgets.length + 1, city: '', weatherData: null, showForm: false, showButton: true};
+    this.widgets.push(newWidget);
+    this.saveToLocalStorage();
+  }
+
+  removeWidget() {
+    if (this.widgets.length > 0) {
+      const removedWidget = this.widgets.pop();
+    }
+    this.saveToLocalStorage();
+  }
+
+  toggleForm(widgetId: number) {
+    const widget = this.widgets.find(w => w.id === widgetId);
+
+    if (widget) {
+      widget.showForm = !widget.showForm;
+      widget.showButton = !widget.showButton;
+    }
   }
 }

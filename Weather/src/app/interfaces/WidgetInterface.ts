@@ -4,6 +4,8 @@ export interface WidgetInterface {
     id: number;
     city: string;
     weatherData: WidgetData | null;
+    showForm: boolean;
+    showButton: boolean;
 }
 
 export interface WeatherButtonClicked {
