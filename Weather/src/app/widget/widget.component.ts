@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { WidgetDataService } from '../services/widget-data/widget-data.service';
 import { WidgetData } from '../interfaces/WidgetData';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -126,12 +126,14 @@ export class WidgetComponent implements OnInit, OnDestroy {
   addWidgets() {
     const newWidget: WidgetInterface = {id: this.widgets.length + 1, city: '', weatherData: null, showForm: false, showButton: true};
     this.widgets.push(newWidget);
+    this.saveToLocalStorage();
   }
 
   removeWidget() {
     if (this.widgets.length > 0) {
       const removedWidget = this.widgets.pop();
     }
+    this.saveToLocalStorage();
   }
 
   toggleForm(widgetId: number) {
