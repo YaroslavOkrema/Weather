@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module'; 
+import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -17,12 +17,14 @@ import { WeatherComponent } from './weather/weather.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WidgetComponent } from './widget/widget.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { SidenavComponent } from "./sidenav/sidenav.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     WeatherComponent,
-    WidgetComponent
+    WidgetComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
