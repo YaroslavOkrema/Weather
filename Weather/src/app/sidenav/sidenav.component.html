@@ -1,1 +1,27 @@
-
+<mat-toolbar>
+  <mat-toolbar-row class="toolbar">
+    <button mat-icon-button (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1>Weather</h1>
+    <span class="theme__switch">
+            Dark
+            <mat-slide-toggle [formControl]="switchTheme"></mat-slide-toggle>
+        </span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-drawer-container>
+  <mat-drawer #drawer opened="true" mode="side">
+    <mat-nav-list role="list">
+      <button routerLink="/weather" mat-button><mat-icon>home</mat-icon>Main</button>
+    </mat-nav-list>
+    <mat-nav-list role="list">
+      <button routerLink="/widget" mat-button><mat-icon>dashboard</mat-icon>Widge</button>
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
